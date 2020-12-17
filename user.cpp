@@ -9,10 +9,16 @@ User::User(int userNum, string name){
     if(userNum < 0){
         cout<<"Warning(User::User): userNum ("<<userNum<<") is less than 0.\n";
     }
-    this->userNum = userNum;
-    this->name = name;
+    if(userNum == 0){
+        this->userNum = 0;
+        this->name = "-No name set-";
+    }
+    else{
+        this->userNum = userNum;
+        this->name = name;
+    }
 }
-User::User():userNum(-1),name("-No name set-"){}
+User::User():userNum(0),name("-No name set-"){}
 
 //get set functions
 int User::getUserNum(){
@@ -52,9 +58,13 @@ void User::addClockedTime(Date& date, Time& time){
     }
     clocked.insert(clocked.begin(),input);
 }
+int User::getClockedSize(){
+    return clocked.size();
+}
 
 //print functions
 void User::clockedPrint(){
+    cout<<userNum<<" "<<name<<endl<<endl;
     for(Datetime& i : clocked){
         cout<<i<<endl;
     }

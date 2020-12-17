@@ -8,6 +8,15 @@
 #include "user.hpp"
 using namespace std;
 
+// int main(){
+//     Date test(2020,2,29);
+//     cout<<test.dayIsValid(29)<<endl;
+
+
+
+// }
+
+
 int main(){
     
     vector<User> users;
@@ -17,12 +26,12 @@ int main(){
     users.emplace_back(2,"DingDing");
     users.emplace_back(3,"Erika");
     users.emplace_back(4,"Eliana");
-    users.emplace_back(5,"");
+    users.emplace_back(0,"");
     users.emplace_back(6,"Kezia");
     users.emplace_back(7,"Meredith");
     users.emplace_back(8,"Wing");
     users.emplace_back(9,"Zhang");
-    users.emplace_back(10,"");
+    users.emplace_back(0,"");
     users.emplace_back(11,"Irena");
     users.emplace_back(12,"Annalie");
     users.emplace_back(13,"John");
@@ -37,6 +46,7 @@ int main(){
         return -1;
     }
 
+    int counter = 1;
     //inputing data into user.clocked
     while(getline(payrollFile, line)){
         istringstream ss(line);
@@ -62,15 +72,20 @@ int main(){
         Date date(year,month,day);
         Time time(hour,minute);
         
-        users[userNum].addClockedTime(date,time);
+        // cout<<counter<<" "<<userNum<<" "<<date<<" "<<time<<" Size: "<<users[userNum].getClockedSize()<<endl;
+        // counter++;
+
+        if((0 < userNum && userNum <= 4) || (6 <= userNum && userNum <=13)){
+            users[userNum].addClockedTime(date,time);
+        }
     }
     //closing the file
     payrollFile.close();
 
 
-    //users[1].clockedPrint();
-    // for(int i = 0; i < users.size(); i++){
-    //     users[i].clockedPrint();
-    // }
+    for(int i = 0; i < 4; i++){
+        users[i].clockedPrint();
+        cout<<endl<<endl;
+    }
 
 }

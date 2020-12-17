@@ -29,6 +29,7 @@ class User{
 
         //clocked functions
         void addClockedTime(Date& date, Time& time);
+        int getClockedSize();
 
         //print functions
         void clockedPrint();
