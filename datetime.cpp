@@ -45,13 +45,7 @@ bool operator<(Datetime& d1, Datetime& d2){
     return false;
 }
 bool operator<=(Datetime& d1, Datetime& d2){
-    if(d1.date <= d2.date){
-        return true;
-    }
-    else if (d1.date == d2.date && d1.time <= d2.time){
-        return true;
-    }
-    return false;
+    return ((d1 == d2) || (d1 < d2));
 }
 bool operator>(Datetime& d1, Datetime& d2){
     if(d1.date > d2.date){
@@ -63,13 +57,7 @@ bool operator>(Datetime& d1, Datetime& d2){
     return false;
 }
 bool operator>=(Datetime& d1, Datetime& d2){
-    if(d1.date >= d2.date){
-        return true;
-    }
-    else if (d1.date == d2.date && d1.time >= d2.time){
-        return true;
-    }
-    return false;
+    return ((d1 == d2) || (d1 > d2));
 }
 
 //print functions

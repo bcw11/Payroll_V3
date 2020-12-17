@@ -40,18 +40,21 @@ float User::getHoursStatutory(){
 
 //rounds time and inserts into the correct order. Doesn't insert if time difference is 0.
 void User::addClockedTime(Date& date, Time& time){
-    time.round15();
+    //input as datetime
     Datetime input(date,time);
 
+    //rounded input
+    Time rTime(time);
+    rTime.round15();
+    Datetime rInput(date,rTime);
+
     for(int i = clocked.size()-1 ; i >= 0 ; i--){
-        if(clocked[i] < input){
-            if((input - clocked[i]) < 0.25){
-                cout<<"Warning(User::addClockedTime): Difference between datetime1("<<clocked[i]<<") and datetime2("<<input<<") is less than 15 minutes. ("<<(input - clocked[i])*60<<" min)\n";
-            }
-            clocked.insert(clocked.begin()+i+1, input);
+        if(clocked[i] < rInput){
+            clocked.insert(clocked.begin()+i+1, rInput);
             return;
         }
-        else if(clocked[i] == input){
+        else if((rInput - clocked[i]) <= 0.25){
+            cout<<"DELETED: ("<<input<<") | Time difference ("<<clocked[i]<<" - "<<input<<") ("<<(input - clocked[i])*60<<" min)\n";
             return;
         }
 

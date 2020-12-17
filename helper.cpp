@@ -27,17 +27,17 @@ void payFile2Clocked(vector<User>& users){
     int userNum, year, month, day, hour, minute, counter = 1;
     Date startDate, endDate;
     
-    //"Oct 5 - Oct 18 (2020).dat"
     //gets start date and end date for date range and returns payrollName
     string payrollName = getStartEndDate(startDate,endDate);
-    rangeIsValid(startDate,endDate);
+    
     //Reading the payroll.dat file and exit if failed
     ifstream payrollFile(payrollName);
     if(!payrollFile.is_open()) {
-        cout << "Unable to open file domestic-stu.txt" << endl;
+        cout<<"\nUnable to open file \""<<payrollName<<"\""<<endl<<endl;
         exit(1);
     }
 
+    rangeIsValid(startDate,endDate);
     //inputing data into user.clocked
     while(getline(payrollFile, line)){
         istringstream ss(line);
@@ -63,15 +63,15 @@ void payFile2Clocked(vector<User>& users){
         Date date(year,month,day);
         Time time(hour,minute);
         
-        // cout<<counter<<" "<<userNum<<" "<<date<<" "<<time<<" Size: "<<users[userNum].getClockedSize()<<endl;
-        // counter++;
+        //break out of loop if date is greater or equal to end date
+        if(date > endDate){
+            cout<<"Start date: "<<startDate<<" End date: "<<endDate<<" currDate: "<<date<<endl;
+            break;
+        }
         if(date >= startDate){
             if((0 < userNum && userNum <= 4) || (6 <= userNum && userNum <=13)){
                 users[userNum].addClockedTime(date,time);
             }
-        }
-        else if(date >= endDate){
-            break;
         }
     }
     //closing the file

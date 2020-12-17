@@ -17,11 +17,16 @@ using namespace std;
 
 
 int main(){
-    // Date date1;
-    // Date date2;
+    // Date date1(2020,10,18);
+    // Date date2(2020,10,17);
+    // cout<<(date2>=date1)<<endl;
     // string input;
     // input = getStartEndDate(date1,date2);
     // rangeIsValid(date1,date2);
+
+    
+    //all float outputs are now 2 digits after the decimal
+    cout<<fixed<<setprecision(2);
 
     //initializing users
     vector<User> users;
@@ -29,7 +34,7 @@ int main(){
 
     payFile2Clocked(users);
 
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < users.size(); i++){
         users[i].clockedPrint();
         cout<<endl<<endl;
     }

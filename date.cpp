@@ -117,10 +117,10 @@ int operator-(Date& d1, Date& d2){
     return output*24;
 }
 bool operator==(Date& d1, Date& d2){
-    return (d1.month == d2.month && d1.day == d2.day);
+    return (d1.year == d2.year && d1.month == d2.month && d1.day == d2.day);
 }
 bool operator!=(Date& d1, Date& d2){
-    return (d1.month != d2.month || d1.day != d2.month);
+    return (d1.year != d2.year || d1.month != d2.month || d1.day != d2.month);
 }
 bool operator<(Date& d1, Date& d2){
     if(d1.year < d2.year){
@@ -135,21 +135,10 @@ bool operator<(Date& d1, Date& d2){
         }
         return false;
     }
-
+    return false;
 }
 bool operator<=(Date& d1, Date& d2){
-    if(d1.year <= d2.year){
-        return true;
-    }
-    else if(d1.year == d2.year){
-        if(d1.month <= d2.month){
-            return true;
-        }
-        else if(d1.month == d2.month && d1.day <= d2.day){
-            return true;
-        }
-        return false;
-    }
+    return ((d1 == d2) || (d1 < d2));
 }
 bool operator>(Date& d1, Date& d2){
     if(d1.year > d2.year){
@@ -164,20 +153,10 @@ bool operator>(Date& d1, Date& d2){
         }
         return false;
     }
+    return false;
 }
 bool operator>=(Date& d1, Date& d2){
-    if(d1.year >= d2.year){
-        return true;
-    }
-    else if(d1.year == d2.year){
-        if(d1.month >= d2.month){
-            return true;
-        }
-        else if(d1.month == d2.month && d1.day >= d2.day){
-            return true;
-        }
-        return false;
-    }
+    return ((d1 == d2) || (d1 > d2));
 }
 
 //print 
