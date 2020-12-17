@@ -28,14 +28,18 @@ float User::getHoursStatutory(){
     return hoursStatutory;
 }   
 
+
+//rounds time and inserts into the correct order. Doesn't insert if time difference is 0.
 void User::addClockedTime(Date& date, Time& time){
-    //time.round15();
+    time.round15();
     Datetime input(date,time);
 
-    for(int i = clocked.size()-1 ; i > 0 ; i--){
-        cout<<i<<endl;
+    for(int i = clocked.size()-1 ; i >= 0 ; i--){
         if(clocked[i] < input){
-            clocked.insert(clocked.begin()+i, input);
+            clocked.insert(clocked.begin()+i+1, input);
+            return;
+        }
+        else if(clocked[i] == input){
             return;
         }
     }

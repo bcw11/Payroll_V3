@@ -72,6 +72,9 @@ void Time::round15(){
 }
 
 //operators
+bool operator-(Time& t1, Time& t2){
+    return ((float)t1 - (float)t2);
+}
 bool operator==(Time& t1, Time& t2){
     return ((float)t1 == (float)t2);
 }

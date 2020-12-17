@@ -32,6 +32,7 @@ class Date{
         bool isHoliday();
 
         //operators
+        friend int operator-(Date& d1, Date& d2);
         friend bool operator==(Date& d1, Date& d2);
         friend bool operator!=(Date& d1, Date& d2);
         friend bool operator<(Date& d1, Date& d2);

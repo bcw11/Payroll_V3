@@ -95,6 +95,26 @@ bool Date::isHoliday(){
 }
 
 //operators
+int operator-(Date& d1, Date& d2){
+    int daysPerMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    int days1 = d1.day, days2 = d2.day, output = 0;
+    for(int i = 0; i < 12; i++){
+        if(i < d1.month-1){
+            days1 = days1 + daysPerMonth[i];
+        }
+        if(i < d2.month-1){
+            days2 = days2 + daysPerMonth[i];
+        }
+    }
+    output = days1 + (d1.year - d2.year)*365 - days2;
+    if(d1.isLeapYear() && (d1.month > 2 || (d1.month == 2 && d1.day == 29))){
+        output++;
+    }
+    if(d2.isLeapYear() && (d2.month > 2 || (d2.month == 2 && d2.day == 29))){
+        output--;
+    }
+    return output*24;
+}
 bool operator==(Date& d1, Date& d2){
     return (d1.month == d2.month && d1.day == d2.day);
 }
