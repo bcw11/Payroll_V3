@@ -96,27 +96,51 @@ bool Date::isHoliday(){
 
 //operators
 bool operator==(Date& d1, Date& d2){
-
+    return (d1.month == d2.month && d1.day == d2.day);
 }
 bool operator!=(Date& d1, Date& d2){
-
+    return (d1.month != d2.month || d1.day != d2.month);
 }
 bool operator<(Date& d1, Date& d2){
-
+    if(d1.month < d2.month){
+        return true;
+    }
+    else if(d1.month == d2.month && d1.day < d2.day){
+        return true;
+    }
+    return false;
 }
 bool operator<=(Date& d1, Date& d2){
-
+    if(d1.month <= d2.month){
+        return true;
+    }
+    else if(d1.month == d2.month && d1.day <= d2.day){
+        return true;
+    }
+    return false;
 }
 bool operator>(Date& d1, Date& d2){
-
+    if(d1.month > d2.month){
+        return true;
+    }
+    else if(d1.month == d2.month && d1.day > d2.day){
+        return true;
+    }
+    return false;
 }
 bool operator>=(Date& d1, Date& d2){
-
+    if(d1.month >= d2.month){
+        return true;
+    }
+    else if(d1.month == d2.month && d1.day >= d2.day){
+        return true;
+    }
+    return false;
 }
 
 //print 
 void Date::stringPrint(){
-
+    string months[12] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
 }
 ostream& operator<<(ostream& outs, Date& date){
 
