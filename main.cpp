@@ -3,13 +3,22 @@
 #include <sstream> //formatted string processing
 #include <cstdlib> //atof and atoi
 #include <cmath>
-#include "date.hpp"
+#include "user.hpp"
 using namespace std;
 
 int main(){
-    Date test(1900,1,1);
-    test.stringPrint();
-    cout<<"\n"<<test<<endl;
+    User Bryan(1,"Bryan");
+    Date date(2020,12,16);
+    Time time(4,0);
+    Date date1(2020,12,16);
+    Time time1(5,0);
+    Date date2(2020,12,16);
+    Time time2(6,0);
+
+    Bryan.addClockedTime(date,time);
+    Bryan.addClockedTime(date1,time1);
+    Bryan.addClockedTime(date2,time2);
+    Bryan.clockedPrint();
 }
 
 

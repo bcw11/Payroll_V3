@@ -46,8 +46,8 @@ bool Time::hourIsValid(int hour){
     return true;
 }
 bool Time::minuteIsValid(int minute){
-    if(minute < 1){
-        cout<<"Error(Time::minuteIsValid): Minute ("<<minute<<") cannot be less than 1. Time("<<*this<<")\n";
+    if(minute < 0){
+        cout<<"Error(Time::minuteIsValid): Minute ("<<minute<<") cannot be less than 0. Time("<<*this<<")\n";
         //exit(1);
         return false;
     }

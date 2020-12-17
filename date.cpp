@@ -56,7 +56,7 @@ bool Date::monthIsValid(int month){
         //exit(1);
         return false;
     }
-    if(year > 12){
+    if(month > 12){
         cout<<"Error(monthIsValid): Month ("<<month<<") cannot be greator than 12. date("<<*this<<")\n";
         //exit(1);
         return false;
