@@ -9,6 +9,7 @@ class Time{
     private:
         int hour;
         int minute;
+        friend class Datetime;
     public:
         //constructors
         Time(int hour, int minute);

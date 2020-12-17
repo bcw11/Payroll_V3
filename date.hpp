@@ -1,3 +1,6 @@
+#ifndef DATE
+#define DATE
+
 #include <iostream>
 #include <string> 
 using namespace std;
@@ -7,6 +10,7 @@ class Date{
         int year;
         int month;
         int day;
+        friend class Datetime;
     public:
         //constructors
         Date(int year, int month, int day);
@@ -40,3 +44,5 @@ class Date{
         friend ostream& operator<<(ostream& outs, Date& date);
 
 };
+
+#endif
