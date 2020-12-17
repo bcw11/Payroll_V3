@@ -1,5 +1,4 @@
 #include "user.hpp"
-
 using namespace std;
 
 
@@ -39,7 +38,7 @@ float User::getHoursStatutory(){
 
 
 //rounds time and inserts into the correct order. Doesn't insert if time difference is 0.
-void User::addClockedTime(Date& date, Time& time){
+void User::addClockedTime(int userNum, Date& date, Time& time){
     //input as datetime
     Datetime input(date,time);
 
@@ -54,7 +53,7 @@ void User::addClockedTime(Date& date, Time& time){
             return;
         }
         else if((rInput - clocked[i]) <= 0.25){
-            cout<<"DELETED: ("<<input<<") | Time difference ("<<clocked[i]<<" - "<<input<<") ("<<(input - clocked[i])*60<<" min)\n";
+            cout<<"DELETED: ("<<input<<") | User:"<<userNum<<" | Time difference ("<<clocked[i]<<" - "<<input<<") ("<<(input - clocked[i])*60<<" min)\n";
             return;
         }
 

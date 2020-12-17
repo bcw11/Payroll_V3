@@ -70,7 +70,7 @@ void payFile2Clocked(vector<User>& users){
         }
         if(date >= startDate){
             if((0 < userNum && userNum <= 4) || (6 <= userNum && userNum <=13)){
-                users[userNum].addClockedTime(date,time);
+                users[userNum].addClockedTime(userNum,date,time);
             }
         }
     }

@@ -35,8 +35,10 @@ int main(){
     payFile2Clocked(users);
 
     for(int i = 0; i < users.size(); i++){
-        users[i].clockedPrint();
-        cout<<endl<<endl;
+        if(users[i].getUserNum() != 0){
+            users[i].clockedPrint();
+            cout<<endl<<endl;
+        }
     }
 
 

@@ -28,14 +28,12 @@ class User{
         float getHoursStatutory();
 
         //clocked functions
-        void addClockedTime(Date& date, Time& time);
+        void addClockedTime(int useNum, Date& date, Time& time);
         int getClockedSize();
 
         //print functions
         void clockedPrint();
         friend ostream& operator<<(ostream& outs, User& user);
-
-
 };
 
 #endif
