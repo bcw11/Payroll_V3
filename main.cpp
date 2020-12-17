@@ -8,14 +8,8 @@ using namespace std;
 
 int main(){
     Date test(1900,1,1);
-    for(int i = 1900; i < 2030; i++){
-        test.setYear(i);
-        cout<<i<<" ";
-        if(test.isLeapYear()){
-            cout<<"is leap year";
-        }
-        cout<<"\n";
-    }
+    test.stringPrint();
+    cout<<"\n"<<test<<endl;
 }
 
 

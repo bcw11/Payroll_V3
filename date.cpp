@@ -141,7 +141,8 @@ bool operator>=(Date& d1, Date& d2){
 //print 
 void Date::stringPrint(){
     string months[12] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+    cout<<months[month-1]<<", "<<day<<" "<<year;
 }
 ostream& operator<<(ostream& outs, Date& date){
-
+    outs<<date.year<<"-"<<date.month<<"-"<<date.day;
 }
