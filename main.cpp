@@ -3,6 +3,7 @@
 #include <sstream> //formatted string processing
 #include <cstdlib> //atof and atoi
 #include <cmath>
+#include <iomanip>
 #include "user.hpp"
 using namespace std;
 
@@ -13,25 +14,30 @@ int main(){
     // cout<<(float)t2<<endl;
     // cout<<(t-t2)*60<<endl;
     
-    Date d1(2019,12,11);
-    Date d2(2020,12,11);
-    cout<<d2-d1<<endl;
-
+    // Date d1(2019,12,11);
+    // Date d2(2020,12,9);
+    // cout<<d1-d2<<endl;
+    //setting precision of floats
+    cout<<fixed<<setprecision(2);
 
     
-    // User Bryan(1,"Bryan");
-    // Date date(2020,12,16);
-    // Time time(4,11);
-    // Date date1(2020,12,16);
-    // Time time1(4,18);
-    // Date date2(2020,12,15);
-    // Time time2(6,23);
+    User Bryan(1,"Bryan");
+    Date date(2020,12,16);
+    Time time(4,11);
+    Date date1(2020,12,16);
+    Time time1(4,18);
+    Date date2(2020,12,15);
+    Time time2(6,23);
 
-    // Bryan.addClockedTime(date,time);
-    // Bryan.addClockedTime(date2,time2);
-    // Bryan.addClockedTime(date1,time1);
+    Datetime datetime1(date,time);
+    Datetime datetime2(date1,time1);
+
+    Bryan.addClockedTime(date,time);
+    Bryan.addClockedTime(date2,time2);
+    Bryan.addClockedTime(date1,time1);
     
-    // Bryan.clockedPrint();
+    
+    Bryan.clockedPrint();
 }
 
 

@@ -22,6 +22,7 @@ class Datetime{
         Time getTime();
 
         //operators
+        friend float operator-(Datetime& d1, Datetime& d2);
         friend bool operator==(Datetime& d1, Datetime& d2);
         friend bool operator!=(Datetime& d1, Datetime& d2);
         friend bool operator<(Datetime& d1, Datetime& d2);

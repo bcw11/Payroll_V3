@@ -29,6 +29,8 @@ class Time{
         void round15();
 
         //operators
+        friend float operator+(Time& t1, Time& t2);
+        friend float operator-(Time& t1, Time& t2);
         friend bool operator==(Time& t1, Time& t2);
         friend bool operator!=(Time& t1, Time& t2);
         friend bool operator<(Time& t1, Time& t2);

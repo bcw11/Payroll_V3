@@ -26,6 +26,9 @@ Time Datetime::getTime(){
 }
 
 //operators
+float operator-(Datetime& d1, Datetime& d2){
+    return ((d1.date - d2.date) + (d1.time - d2.time));
+}
 bool operator==(Datetime& d1, Datetime& d2){
     return (d1.date == d2.date && d1.time == d2.time);
 }
