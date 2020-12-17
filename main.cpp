@@ -5,88 +5,49 @@
 #include <cmath>
 #include <iomanip>
 #include <vector>
+#include "helper.hpp"
 #include "user.hpp"
 using namespace std;
 
 // int main(){
 //     Date test(2020,2,29);
 //     cout<<test.dayIsValid(29)<<endl;
-
-
-
 // }
 
 
 int main(){
+
+    string month1;
+    string month2;
+    string day1;
+    string day2;
+    string input;
+    int imonth1;
+    int imonth2;
+    int iday1;
+    int iday2;
+
+    cin>>input;
+    istringstream ss(input);
+    getline(ss,month1,' ');
+    month1 = aotf(month1.cstr());
+    getline(ss,day1,' ');
+    getline(ss,month2,' ');
+    getline(ss,day2,'.');
     
-    vector<User> users;
-    users.reserve(13);
-    users.emplace_back(0,"");
-    users.emplace_back(1,"HaeJung");
-    users.emplace_back(2,"DingDing");
-    users.emplace_back(3,"Erika");
-    users.emplace_back(4,"Eliana");
-    users.emplace_back(0,"");
-    users.emplace_back(6,"Kezia");
-    users.emplace_back(7,"Meredith");
-    users.emplace_back(8,"Wing");
-    users.emplace_back(9,"Zhang");
-    users.emplace_back(0,"");
-    users.emplace_back(11,"Irena");
-    users.emplace_back(12,"Annalie");
-    users.emplace_back(13,"John");
+    
+    //initializing users
+    // vector<User> users;
+    // usersInit(users);
 
-    //Reading the payroll.dat file and exit if failed
-    string sUserNum, sYear, sMonth, sDay, sHour, sMinute, line;
-    int userNum, year, month, day, hour, minute;
+    // payFile2Clocked(users);
 
-    ifstream payrollFile("Oct 5 - Oct 18.dat");
-    if(!payrollFile.is_open()) {
-        cout << "Unable to open file domestic-stu.txt" << endl;
-        return -1;
-    }
-
-    int counter = 1;
-    //inputing data into user.clocked
-    while(getline(payrollFile, line)){
-        istringstream ss(line);
-
-        getline(ss, sUserNum, '\t');
-        userNum = atof(sUserNum.c_str());
-
-        getline(ss, sYear, '-');
-        year = atof(sYear.c_str());
-
-        getline(ss, sMonth, '-');
-        month = atof(sMonth.c_str());
-
-        getline(ss, sDay, ' ');
-        day = atof(sDay.c_str());
-
-        getline(ss, sHour, ':');
-        hour = atof(sHour.c_str());
-
-        getline(ss, sMinute, ':');
-        minute = atof(sMinute.c_str());
-
-        Date date(year,month,day);
-        Time time(hour,minute);
-        
-        // cout<<counter<<" "<<userNum<<" "<<date<<" "<<time<<" Size: "<<users[userNum].getClockedSize()<<endl;
-        // counter++;
-
-        if((0 < userNum && userNum <= 4) || (6 <= userNum && userNum <=13)){
-            users[userNum].addClockedTime(date,time);
-        }
-    }
-    //closing the file
-    payrollFile.close();
+    // for(int i = 0; i < 4; i++){
+    //     users[i].clockedPrint();
+    //     cout<<endl<<endl;
+    // }
 
 
-    for(int i = 0; i < 4; i++){
-        users[i].clockedPrint();
-        cout<<endl<<endl;
-    }
 
 
 
