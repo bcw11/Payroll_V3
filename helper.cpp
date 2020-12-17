@@ -27,10 +27,10 @@ void payFile2Clocked(vector<User>& users){
     int userNum, year, month, day, hour, minute, counter = 1;
     Date startDate, endDate;
     
-    //"Oct 5 - Oct 18.dat"
+    //"Oct 5 - Oct 18 (2020).dat"
     //gets start date and end date for date range and returns payrollName
     string payrollName = getStartEndDate(startDate,endDate);
-    startEndDateIsValid(startDate,endDate);
+    rangeIsValid(startDate,endDate);
     //Reading the payroll.dat file and exit if failed
     ifstream payrollFile(payrollName);
     if(!payrollFile.is_open()) {
@@ -98,6 +98,7 @@ string getStartEndDate(Date& start, Date& end){
     monthMap["Dec"] = 12;
 
     //getting filename
+    cout<<"File format: MMM dd - MMM dd (YYYY).dat\n";
     cout<<"Enter file name: ";
     getline(cin,filename);
     istringstream ss(filename);
@@ -118,15 +119,36 @@ string getStartEndDate(Date& start, Date& end){
     end.setMonth(monthMap[sBuffer]);
 
     //end day
-    getline(ss,sBuffer,'.');
+    getline(ss,sBuffer,' ');
     iBuffer = atoi(sBuffer.c_str());
     end.setDay(iBuffer);
+
+    //year
+    getline(ss,sBuffer,'(');
+    getline(ss,sBuffer,')');
+    iBuffer = atoi(sBuffer.c_str());
+    start.setYear(iBuffer);
+    end.setYear(iBuffer);
 
     return filename;
 }
 
-
-
+//checks the vadility of start and end dates
+void rangeIsValid(Date& start, Date& end){
+    Date oct18(2020,10,18);
+    if((end-start) < 0){
+        cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") end date is bigger than start date.\n";
+    }
+    else if((end-start+24) < 14*24){
+        cout<<"Warning(rangeIsValid): Range ("<<(end - start + 1)/24<<") is less than 14 days.\n";
+    }
+    else if((end-start+24) > 14*24){
+        cout<<"Warning(rangeIsValid): Range ("<<(end - start + 1)/24<<") is greater than 14 days.\n";
+    }
+    if(((start-oct18-1)/24)%14 != 0){
+        cout<<"Warning(rangeIsValid): Start date does not start as a multiple of 2 weeks from Oct 18, 2020. ("<<(start-oct18-1)/24<<")\n";
+    }
+}
 
 
 

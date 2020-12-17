@@ -16,16 +16,28 @@ using namespace std;
 // }
 
 
-int main(){    
+int main(){
+    // Date date1;
+    // Date date2;
+    // string input;
+    // input = getStartEndDate(date1,date2);
+    // rangeIsValid(date1,date2);
+
     //initializing users
-    // vector<User> users;
-    // usersInit(users);
+    vector<User> users;
+    usersInit(users);
 
-    // payFile2Clocked(users);
+    payFile2Clocked(users);
 
-    // for(int i = 0; i < 4; i++){
-    //     users[i].clockedPrint();
-    //     cout<<endl<<endl;
-    // }
+    for(int i = 0; i < 4; i++){
+        users[i].clockedPrint();
+        cout<<endl<<endl;
+    }
 
+
+
+
+
+
+    
 }

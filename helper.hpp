@@ -22,7 +22,9 @@ void payFile2Clocked(vector<User>& users);
 
 //gets start date and end date for date range and returns payrollName
 string getStartEndDate(Date& start, Date& end);
-void startEndDateIsValid(Date& start, Date& end);
+
+//checks the vadility of start and end dates
+void rangeIsValid(Date& start, Date& end);
 
 
 
