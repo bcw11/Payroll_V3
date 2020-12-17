@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iomanip>
 #include <vector>
+#include <map>
 #include "helper.hpp"
 #include "user.hpp"
 using namespace std;
@@ -15,27 +16,7 @@ using namespace std;
 // }
 
 
-int main(){
-
-    string month1;
-    string month2;
-    string day1;
-    string day2;
-    string input;
-    int imonth1;
-    int imonth2;
-    int iday1;
-    int iday2;
-
-    cin>>input;
-    istringstream ss(input);
-    getline(ss,month1,' ');
-    month1 = aotf(month1.cstr());
-    getline(ss,day1,' ');
-    getline(ss,month2,' ');
-    getline(ss,day2,'.');
-    
-    
+int main(){    
     //initializing users
     // vector<User> users;
     // usersInit(users);
@@ -47,10 +28,4 @@ int main(){
     //     cout<<endl<<endl;
     // }
 
-
-
-
-
-
-    
 }

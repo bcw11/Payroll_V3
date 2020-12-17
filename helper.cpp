@@ -22,17 +22,16 @@ void usersInit(vector<User>& users){
 
 //gets all datetimes from payroll file and puts into user's clocked vector
 void payFile2Clocked(vector<User>& users){
-
     //variables
     string sUserNum, sYear, sMonth, sDay, sHour, sMinute, line;
     int userNum, year, month, day, hour, minute, counter = 1;
-
+    Date startDate, endDate;
+    
+    //"Oct 5 - Oct 18.dat"
+    //gets start date and end date for date range and returns payrollName
+    string payrollName = getStartEndDate(startDate,endDate);
+    startEndDateIsValid(startDate,endDate);
     //Reading the payroll.dat file and exit if failed
-    string payrollName = "Oct 5 - Oct 18.dat";
-
-    //getline()
-
-
     ifstream payrollFile(payrollName);
     if(!payrollFile.is_open()) {
         cout << "Unable to open file domestic-stu.txt" << endl;
@@ -44,33 +43,96 @@ void payFile2Clocked(vector<User>& users){
         istringstream ss(line);
 
         getline(ss, sUserNum, '\t');
-        userNum = atof(sUserNum.c_str());
+        userNum = atoi(sUserNum.c_str());
 
         getline(ss, sYear, '-');
-        year = atof(sYear.c_str());
+        year = atoi(sYear.c_str());
 
         getline(ss, sMonth, '-');
-        month = atof(sMonth.c_str());
+        month = atoi(sMonth.c_str());
 
         getline(ss, sDay, ' ');
-        day = atof(sDay.c_str());
+        day = atoi(sDay.c_str());
 
         getline(ss, sHour, ':');
-        hour = atof(sHour.c_str());
+        hour = atoi(sHour.c_str());
 
         getline(ss, sMinute, ':');
-        minute = atof(sMinute.c_str());
+        minute = atoi(sMinute.c_str());
 
         Date date(year,month,day);
         Time time(hour,minute);
         
         // cout<<counter<<" "<<userNum<<" "<<date<<" "<<time<<" Size: "<<users[userNum].getClockedSize()<<endl;
         // counter++;
-
-        if((0 < userNum && userNum <= 4) || (6 <= userNum && userNum <=13)){
-            users[userNum].addClockedTime(date,time);
+        if(date >= startDate){
+            if((0 < userNum && userNum <= 4) || (6 <= userNum && userNum <=13)){
+                users[userNum].addClockedTime(date,time);
+            }
+        }
+        else if(date >= endDate){
+            break;
         }
     }
     //closing the file
     payrollFile.close();
 }
+
+
+//gets start date and end date for date range
+string getStartEndDate(Date& start, Date& end){
+    string filename,sBuffer;
+    int iBuffer;
+    map<string,int> monthMap;
+    monthMap["Jan"] = 1;
+    monthMap["Feb"] = 2;
+    monthMap["Mar"] = 3;
+    monthMap["Apr"] = 4;
+    monthMap["May"] = 5;
+    monthMap["Jun"] = 6;
+    monthMap["Jul"] = 7;
+    monthMap["Aug"] = 8;
+    monthMap["Sep"] = 9;
+    monthMap["Oct"] = 10;
+    monthMap["Nov"] = 11;
+    monthMap["Dec"] = 12;
+
+    //getting filename
+    cout<<"Enter file name: ";
+    getline(cin,filename);
+    istringstream ss(filename);
+    
+    //putting data into start end dates
+    //start month
+    getline(ss,sBuffer,' ');
+    start.setMonth(monthMap[sBuffer]);
+
+    //start day
+    getline(ss,sBuffer,' ');
+    iBuffer = atoi(sBuffer.c_str());
+    start.setDay(iBuffer);
+
+    //end month
+    getline(ss,sBuffer,' ');
+    getline(ss,sBuffer,' ');
+    end.setMonth(monthMap[sBuffer]);
+
+    //end day
+    getline(ss,sBuffer,'.');
+    iBuffer = atoi(sBuffer.c_str());
+    end.setDay(iBuffer);
+
+    return filename;
+}
+
+
+
+
+
+
+
+
+
+
+
+
