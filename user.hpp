@@ -35,6 +35,9 @@ class User{
         void calWorkHours();
         int getClockedSize();
 
+        //checks if holiday is in range
+        bool holidayInRange();
+
         //print functions
         void clockedPrint();
         friend ostream& operator<<(ostream& outs, User& user);

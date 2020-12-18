@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string> 
+#include <vector>
 using namespace std;
 
 class Date{
@@ -29,7 +30,9 @@ class Date{
         bool monthIsValid(int month);
         bool dayIsValid(int day);
         bool isLeapYear();
+        int dayOfWeek();
         bool isHoliday();
+        vector<Date> holidayList();
 
         //operators
         friend int operator-(Date& d1, Date& d2);

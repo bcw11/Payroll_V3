@@ -92,8 +92,117 @@ bool Date::isLeapYear(){
     }
     return false;
 }
-bool Date::isHoliday(){
 
+
+//returns an int for the day of the week. 0-Sunday, 1-Monday, 2-Tuesday...
+//(alogrithm I found online; Sakomoto's method)
+int Date::dayOfWeek(){
+    int y = year, m = month, d = day;
+    int t[12] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+    if(m < 3){
+        y -= 1;
+    }
+    return (y + (y / 4) - (y / 100) +  (y / 400) + t[m - 1] + d) % 7;      
+    //string w[7] = {"Sunday","Monday","Tuesday","Wednesday","Thrusday","Friday","Saturday"};
+}
+
+//checks if date is a holiday
+bool Date::isHoliday(){
+    vector<Date> holidays = holidayList();
+    for(int i = 0; i < holidays.size(); i++){
+        if(*this == holidays[i]){
+            return true;
+        }
+    }
+    return false;
+}
+//returns a vector of holidays that year
+vector<Date> Date::holidayList(){
+    vector<Date> holidays;
+    holidays.reserve(10);
+    int hDay;
+
+    //New Year's
+    holidays.emplace_back(year,1,1);
+
+    //Family Day (3rd monday in feb) (x+(5-2(x-2))+14 => -x+9+14)
+    Date feb(year,2,1);
+    if(feb.dayOfWeek() > 1){
+        hDay = -feb.dayOfWeek() + 9 + 14;
+    }
+    else{
+        hDay = 2 - feb.dayOfWeek() + 14;
+    }
+    holidays.emplace_back(year,2,hDay);
+
+    //Good Friday
+    int a = year%19;
+    int b = year/100;
+    int c = year%100;
+    int d = b/4;
+    int e = b%4;
+    int f = (b+8)/25;
+    int g = (b-f+1)/3;
+    int h = ((19*a)+b-d-g+15)%30;
+    int i = c/4;
+    int j = c%4;
+    int k = (32+(2*e)+(2*i)-h-j)%7;
+    int m = (a+(11*h)+(22*k))/451;
+    int hMonth = (h+k-(7*m)+114)/31;
+    int p = (h+k-(7*m)+114)%31;
+    hDay = p-1;
+    holidays.emplace_back(year,hMonth,hDay);
+
+    //Victoria Day (2nd last monday in may)
+    Date may(year,5,31);
+    if(may.dayOfWeek() > 1){
+        hDay = 31 - (may.dayOfWeek()-1) - 7;
+    }
+    else{
+        hDay = 31 - 6*(1-may.dayOfWeek()) - 7;
+    }
+    holidays.emplace_back(year,5,hDay);
+
+    //Canada Day
+    holidays.emplace_back(year,7,1);
+
+    //British Columbia Day (1st monday in aug)
+    Date aug(year,8,1);
+    if(aug.dayOfWeek() > 1){
+        hDay = -aug.dayOfWeek() + 9;
+    }
+    else{
+        hDay = 2 - aug.dayOfWeek();
+    }
+    holidays.emplace_back(year,8,hDay);
+
+    //Labour Day (1st monday in sept)
+    Date sept(year,9,1);
+    if(sept.dayOfWeek() > 1){
+        hDay = -sept.dayOfWeek() + 9;
+    }
+    else{
+        hDay = 2 - sept.dayOfWeek();
+    }
+    holidays.emplace_back(year,9,hDay);
+
+    //Thanksgiving (2nd monday in oct)
+    Date oct(year,10,1);
+    if(oct.dayOfWeek() > 1){
+        hDay = -oct.dayOfWeek() + 9 + 7;
+    }
+    else{
+        hDay = 2 - oct.dayOfWeek() + 7;
+    }
+    holidays.emplace_back(year,10,hDay);
+
+    //Remembrance Day
+    holidays.emplace_back(year,11,11);
+
+    //Christmas Day
+    holidays.emplace_back(year,12,25);
+
+    return holidays;
 }
 
 //operators

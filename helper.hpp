@@ -20,7 +20,7 @@ void usersInit(vector<User>& users);
 //gets all datetimes from payroll file and puts into user's clocked vector
 void payFile2Clocked(vector<User>& users);
 
-//gets start date and end date for date range and returns payrollName
+//gets start date and end date from user for date range and returns payrollName
 string getStartEndDate(Date& start, Date& end);
 
 //checks the vadility of start and end dates

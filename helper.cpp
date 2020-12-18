@@ -79,7 +79,7 @@ void payFile2Clocked(vector<User>& users){
 }
 
 
-//gets start date and end date for date range
+//gets start date and end date from user for date range
 string getStartEndDate(Date& start, Date& end){
     string filename,sBuffer;
     int iBuffer;
@@ -135,6 +135,7 @@ string getStartEndDate(Date& start, Date& end){
 
 //checks the vadility of start and end dates
 void rangeIsValid(Date& start, Date& end){
+    //only cheecking dates after oct. 18 2020
     Date oct18(2020,10,18);
     if((end-start) < 0){
         cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") end date is bigger than start date.\n";
@@ -148,7 +149,6 @@ void rangeIsValid(Date& start, Date& end){
     if(((start-oct18-1)/24)%14 != 0){
         cout<<"Warning(rangeIsValid): Start date does not start as a multiple of 2 weeks from Oct 18, 2020. ("<<start<<" "<<end<<")\n";
     }
-
 }
 
 

@@ -164,6 +164,12 @@ int User::getClockedSize(){
 }
 
 
+//checks if holiday is in range of clocked times
+bool User::holidayInRange(){
+
+}
+
+
 //print functions
 void User::clockedPrint(){
     cout<<userNum<<" "<<name<<endl<<endl;
