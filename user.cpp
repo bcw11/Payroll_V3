@@ -4,7 +4,7 @@ using namespace std;
 
 
 //constructors
-User::User(int userNum, string name){
+User::User(int userNum, string name):hoursWorked(0),hoursOvertime(0),hoursStatutory(0){
     if(userNum < 0){
         cout<<"Warning(User::User): userNum ("<<userNum<<") is less than 0.\n";
     }
@@ -17,7 +17,8 @@ User::User(int userNum, string name){
         this->name = name;
     }
 }
-User::User():userNum(0),name("-No name set-"){}
+User::User():userNum(0),name("-No name set-"),hoursWorked(0),hoursOvertime(0),hoursStatutory(0){}
+
 
 //get set functions
 int User::getUserNum(){
@@ -60,9 +61,29 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
     }
     clocked.insert(clocked.begin(),input);
 }
+//asks user to fill in missing time
+void User::fillMissingTime(){
+    //error checking
+    if(clocked.size()%2 == 0){
+        cout<<"Error(User::fillMissingTime): Clocked has even elements ("<<clocked.size()<<").\n";
+        return;
+    }
+
+    Date date;
+    Time time;
+    int counter = 0;
+    for(int i = 0; i < clocked.size(); i++){
+        
+    }
+
+
+
+}
+//returns size of clocked vector
 int User::getClockedSize(){
     return clocked.size();
 }
+
 
 //print functions
 void User::clockedPrint(){
@@ -72,9 +93,12 @@ void User::clockedPrint(){
     }
 }
 ostream& operator<<(ostream& outs, User& user){
-    outs<<user.userNum<<" "<<user.name<<"\t"<<user.hoursWorked;
+    outs<<user.userNum<<" "<<user.name;
+    if(user.hoursWorked > 0){
+        outs<<"\t"<<user.hoursWorked;
+    }
     if(user.hoursOvertime > 0){
-        outs<<"+ "<<user.hoursOvertime<<"OT";
+        outs<<" + "<<user.hoursOvertime<<"OT";
     }
     //check if stat holiday is in date range
     // if(){
@@ -83,4 +107,5 @@ ostream& operator<<(ostream& outs, User& user){
     //         outs<<" + "<<user.hoursStatutory<<"(x1.5)";
     //     }
     // }
+    return outs;
 }

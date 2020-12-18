@@ -8,9 +8,9 @@ Date::Date(int year, int month, int day){
     this->year = year;
     this->month = month;
     this->day = day;
-    setYear(year);
-    setMonth(month);
-    setDay(day);
+    yearIsValid(year);
+    monthIsValid(month);
+    dayIsValid(day);
 }
 Date::Date():year(0),month(0),day(0){}
 
@@ -61,6 +61,7 @@ bool Date::monthIsValid(int month){
         //exit(1);
         return false;
     }
+    return true;
 }
 bool Date::dayIsValid(int day){
     int daysPerMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31};

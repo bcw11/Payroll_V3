@@ -107,6 +107,7 @@ string getStartEndDate(Date& start, Date& end){
     //start month
     getline(ss,sBuffer,' ');
     start.setMonth(monthMap[sBuffer]);
+    cout<<start<<endl;
 
     //start day
     getline(ss,sBuffer,' ');
@@ -140,18 +141,27 @@ void rangeIsValid(Date& start, Date& end){
         cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") end date is bigger than start date.\n";
     }
     else if((end-start+24) < 14*24){
-        cout<<"Warning(rangeIsValid): Range ("<<(end - start + 1)/24<<") is less than 14 days.\n";
+        cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") is less than 14 days.\n";
     }
     else if((end-start+24) > 14*24){
-        cout<<"Warning(rangeIsValid): Range ("<<(end - start + 1)/24<<") is greater than 14 days.\n";
+        cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") is greater than 14 days.\n";
     }
     if(((start-oct18-1)/24)%14 != 0){
-        cout<<"Warning(rangeIsValid): Start date does not start as a multiple of 2 weeks from Oct 18, 2020. ("<<(start-oct18-1)/24<<")\n";
+        cout<<"Warning(rangeIsValid): Start date does not start as a multiple of 2 weeks from Oct 18, 2020. ("<<start<<" "<<end<<")\n";
     }
+
 }
 
 
-
+//prints users vector
+void printUsers(vector<User>& users){
+    for(int i = 0; i < users.size(); i++){
+        if(users[i].getUserNum() != 0){
+            users[i].clockedPrint();
+            cout<<endl<<endl;
+        }
+    }
+}
 
 
 

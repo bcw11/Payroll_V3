@@ -8,8 +8,8 @@ using namespace std;
 Time::Time(int hour, int minute){
     this->hour = hour;
     this->minute = minute;
-    setHour(hour);
-    setMinute(minute);
+    hourIsValid(hour);
+    minuteIsValid(minute);
 }
 Time::Time():hour(0),minute(0){}
 

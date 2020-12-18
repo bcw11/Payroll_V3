@@ -32,14 +32,20 @@ int main(){
     vector<User> users;
     usersInit(users);
 
+    //puts clocked data from payroll file into users vector
     payFile2Clocked(users);
+
+    printUsers(users);
 
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
-            users[i].clockedPrint();
-            cout<<endl<<endl;
+            if(users[i].getClockedSize()%2 == 1){
+                cout<<users[i]<<" Clocked size: "<<users[i].getClockedSize()<<endl;
+            }
         }
     }
+
+    
 
 
 

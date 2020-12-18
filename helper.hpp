@@ -26,6 +26,9 @@ string getStartEndDate(Date& start, Date& end);
 //checks the vadility of start and end dates
 void rangeIsValid(Date& start, Date& end);
 
+//prints users vector
+void printUsers(vector<User>& users);
+
 
 
 
