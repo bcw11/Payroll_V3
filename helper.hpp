@@ -27,7 +27,7 @@ string getStartEndDate(Date& start, Date& end);
 void rangeIsValid(Date& start, Date& end);
 
 //prints users vector
-void printUsers(vector<User>& users);
+void printUsersClocked(vector<User>& users);
 
 
 

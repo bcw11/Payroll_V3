@@ -118,28 +118,43 @@ void User::fillMissingTime(){
     //error checking
     if(clocked.size()%2 == 1){
         cout<<"Error(User::fillMissingTime): Program ended with odd elements ("<<clocked.size()<<").\n";
-        return;
     }
 }
 
 //calculating hoursWorked and hoursOvertime
 void User::calWorkHours(){
+    //error checking
+    if(clocked.size()%2 == 1){
+        cout<<"Error(User::calWorkHours): Clocked vector has odd elements ("<<clocked.size()<<").\n";
+        return;
+    }
     Date date = clocked[0].getDate();
     Date currDate;
-    Time time;
-    int counter = 0;
+    float hours = 0;
     for(int i = 0; i < clocked.size() ; i++){
         currDate = clocked[i].getDate();
-        if(date == currDate){
-            counter++;
+        if(date == currDate && i%2 == 1){
+            hours = hours + (clocked[i] - clocked[i-1]);
         }
         if(date != currDate || i == clocked.size()-1){
-            if(counter%2 == 1){
-
+            //if user is Wing deduct his break (30min)
+            if(userNum == 8){
+                hours = hours - 0.5;
             }
+            //checking for daily overtime
+            if((hours - 8) > 0){
+                hoursOvertime = hoursOvertime + hours - 8;
+                hours = 8;
+            }
+            hoursWorked = hoursWorked + hours;
+            hours = 0;
             date = currDate;
-            counter = 1;
         }
+    }
+    //checking for weekly overtime
+    if(hoursWorked > 80){
+        hoursOvertime = hoursOvertime + hoursWorked - 80;
+        hoursWorked = 80;
     }
 }
 //returns size of clocked vector
@@ -157,11 +172,28 @@ void User::clockedPrint(){
 }
 ostream& operator<<(ostream& outs, User& user){
     outs<<user.userNum<<" "<<user.name;
+    //printing tabs for short names
+    if(user.userNum < 10){
+        outs<<" ";
+    }
+    if(user.name.size() < 5){
+        outs<<"\t";
+    }
+    //printing hours worked + OT
     if(user.hoursWorked > 0){
         outs<<"\t"<<user.hoursWorked;
     }
     if(user.hoursOvertime > 0){
-        outs<<" + "<<user.hoursOvertime<<"OT";
+        outs<<" + "<<user.hoursOvertime<<" OT";
+    }
+    else{
+        outs<<"\t";
+    }
+    if(user.hoursOvertime <= 10){
+        outs<<"\t";
+    }
+    if(user.hoursWorked > 0){
+        outs<<"\t"<<(user.hoursWorked + user.hoursOvertime)*0.04;
     }
     //check if stat holiday is in date range
     // if(){

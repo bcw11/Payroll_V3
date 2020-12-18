@@ -107,7 +107,6 @@ string getStartEndDate(Date& start, Date& end){
     //start month
     getline(ss,sBuffer,' ');
     start.setMonth(monthMap[sBuffer]);
-    cout<<start<<endl;
 
     //start day
     getline(ss,sBuffer,' ');
@@ -153,8 +152,8 @@ void rangeIsValid(Date& start, Date& end){
 }
 
 
-//prints users vector
-void printUsers(vector<User>& users){
+//prints users clocked vector
+void printUsersClocked(vector<User>& users){
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
             users[i].clockedPrint();

@@ -36,9 +36,11 @@ int main(){
     //puts clocked data from payroll file into users vector
     payFile2Clocked(users);
 
-    printUsers(users);
+    //
+    printUsersClocked(users);
 
     //filling in missing times
+    cout<<"\n";
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
             cout<<users[i]<<" Clocked size: "<<users[i].getClockedSize()<<endl;
@@ -47,10 +49,19 @@ int main(){
     }
 
     //calculating hoursWorked and hoursOvertime
+    cout<<"\n";
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
             cout<<users[i]<<" Clocked size: "<<users[i].getClockedSize()<<endl;
             users[i].calWorkHours();
+        }
+    }
+
+    //printing out users vector
+    cout<<"\n";
+    for(int i = 0; i < users.size(); i++){
+        if(users[i].getUserNum() != 0){
+            cout<<users[i]<<endl;
         }
     }
 
