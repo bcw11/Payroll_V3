@@ -58,7 +58,7 @@ int main(){
     }
 
     //printing out users vector
-    cout<<"\n";
+    cout<<"\n\t\tHours Worked\t\tVacationPay\n";
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
             cout<<users[i]<<endl;

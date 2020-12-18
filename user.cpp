@@ -58,7 +58,7 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
             return;
         }
     }
-    clocked.insert(clocked.begin(),input);
+    clocked.insert(clocked.begin(),rInput);
 }
 
 //asks user to fill in missing time
