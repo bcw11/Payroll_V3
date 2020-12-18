@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
+#include <sstream> //formatted string processing
 #include "datetime.hpp"
 using namespace std;
 
@@ -30,6 +32,7 @@ class User{
         //clocked functions
         void addClockedTime(int useNum, Date& date, Time& time);
         void fillMissingTime();
+        void calWorkHours();
         int getClockedSize();
 
         //print functions

@@ -17,13 +17,14 @@ using namespace std;
 
 
 int main(){
-    // Date date1(2020,10,18);
-    // Date date2(2020,10,17);
-    // cout<<(date2>=date1)<<endl;
-    // string input;
-    // input = getStartEndDate(date1,date2);
-    // rangeIsValid(date1,date2);
-
+    // Datetime datetime1(2020,12,11,20,0);
+    // Datetime datetime2(2020,12,1,21,0);
+    // cout<<(datetime1<datetime2)<<endl;
+    // Date date1(2020,10,5);
+    // Date date2(2020,10,5);
+    // cout<<(date1==date2)<<endl;
+    // cout<<(date1!=date2)<<endl;
+    // cout<<(1!=1)<<endl;
     
     //all float outputs are now 2 digits after the decimal
     cout<<fixed<<setprecision(2);
@@ -37,13 +38,23 @@ int main(){
 
     printUsers(users);
 
+    //filling in missing times
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
-            if(users[i].getClockedSize()%2 == 1){
-                cout<<users[i]<<" Clocked size: "<<users[i].getClockedSize()<<endl;
-            }
+            cout<<users[i]<<" Clocked size: "<<users[i].getClockedSize()<<endl;
+            users[i].fillMissingTime();
         }
     }
+
+    //calculating hoursWorked and hoursOvertime
+    for(int i = 0; i < users.size(); i++){
+        if(users[i].getUserNum() != 0){
+            cout<<users[i]<<" Clocked size: "<<users[i].getClockedSize()<<endl;
+            users[i].calWorkHours();
+        }
+    }
+
+    
 
     
 

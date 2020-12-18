@@ -53,31 +53,94 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
             clocked.insert(clocked.begin()+i+1, rInput);
             return;
         }
-        else if((rInput - clocked[i]) <= 0.25){
+        else if(abs(float(rInput - clocked[i])) <= 0.25){
             cout<<"DELETED: ("<<input<<") | User:"<<userNum<<" | Time difference ("<<clocked[i]<<" - "<<input<<") ("<<(input - clocked[i])*60<<" min)\n";
             return;
         }
-
     }
     clocked.insert(clocked.begin(),input);
 }
+
 //asks user to fill in missing time
 void User::fillMissingTime(){
+    Date date = clocked[0].getDate();
+    Date currDate;
+    Time time;
+    int i = 0,counter = 0,iHour,iMinute;
+    string sHour,sMinute,input;
+    while(i<clocked.size()){
+        currDate = clocked[i].getDate();
+        if(date == currDate){
+            counter++;
+        }
+        if(date != currDate || i == clocked.size()-1){
+            if(counter%2 == 1){
+                while(true){
+                    //printing times that day
+                    if(i == clocked.size()-1){
+                        i++;
+                    }
+                    for(int j = i-counter; j < i ; j++){
+                        cout<<clocked[j]<<endl;
+                    }
+
+                    //getting input from user
+                    cout<<"Enter the missing time(HH mm): ";
+                    getline(cin,input);
+                    cout<<"\n";
+
+                    //if input is \n end while loop
+                    if(input == ""){
+                        if(counter%2 == 1){
+                            cout<<"Warning(User::fillMissingTime): Odd amount of times ("<<counter<<") for date("<<date<<").\n";
+                        }
+                        break;
+                    }
+
+                    //adding time to clocked vector
+                    istringstream ss(input);
+                    getline(ss,sHour,' ');
+                    iHour = atoi(sHour.c_str());
+                    getline(ss,sMinute);
+                    iMinute = atoi(sMinute.c_str());
+                    time.setHour(iHour);
+                    time.setMinute(iMinute);
+                    addClockedTime(userNum,date,time);
+                    counter++;
+                    i++;
+                }
+            }
+            date = currDate;
+            counter = 1;
+        }
+        i++;
+    }
     //error checking
-    if(clocked.size()%2 == 0){
-        cout<<"Error(User::fillMissingTime): Clocked has even elements ("<<clocked.size()<<").\n";
+    if(clocked.size()%2 == 1){
+        cout<<"Error(User::fillMissingTime): Program ended with odd elements ("<<clocked.size()<<").\n";
         return;
     }
+}
 
-    Date date;
+//calculating hoursWorked and hoursOvertime
+void User::calWorkHours(){
+    Date date = clocked[0].getDate();
+    Date currDate;
     Time time;
     int counter = 0;
-    for(int i = 0; i < clocked.size(); i++){
-        
+    for(int i = 0; i < clocked.size() ; i++){
+        currDate = clocked[i].getDate();
+        if(date == currDate){
+            counter++;
+        }
+        if(date != currDate || i == clocked.size()-1){
+            if(counter%2 == 1){
+
+            }
+            date = currDate;
+            counter = 1;
+        }
     }
-
-
-
 }
 //returns size of clocked vector
 int User::getClockedSize(){
