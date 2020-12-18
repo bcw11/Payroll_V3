@@ -128,6 +128,7 @@ void User::calWorkHours(){
         cout<<"Error(User::calWorkHours): Clocked vector has odd elements ("<<clocked.size()<<").\n";
         return;
     }
+    
     Date date = clocked[0].getDate();
     Date currDate;
     float hours = 0;
