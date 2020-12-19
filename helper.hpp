@@ -11,11 +11,10 @@
 #include <map>
 #include "user.hpp"
 using namespace std;
-
+//extern Date g_startDate, g_endDate;
 
 //initializing users 
 void usersInit(vector<User>& users);
-
 
 //gets all datetimes from payroll file and puts into user's clocked vector
 void payFile2Clocked(vector<User>& users);
@@ -28,6 +27,9 @@ void rangeIsValid(Date& start, Date& end);
 
 //prints users vector
 void printUsersClocked(vector<User>& users);
+
+//prints out users vector
+void printUsers(vector<User>& users);
 
 
 

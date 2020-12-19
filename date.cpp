@@ -276,4 +276,5 @@ void Date::stringPrint(){
 }
 ostream& operator<<(ostream& outs, Date& date){
     outs<<date.year<<"-"<<date.month<<"-"<<date.day;
+    return outs;
 }

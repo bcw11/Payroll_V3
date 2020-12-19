@@ -1,10 +1,10 @@
 #include "user.hpp"
 using namespace std;
-
+extern Date g_startDate, g_endDate;
 
 
 //constructors
-User::User(int userNum, string name):hoursWorked(0),hoursOvertime(0),hoursStatutory(0){
+User::User(int userNum, string name):hoursWorked(0),hoursOvertime(0),hoursStatutory(0),daysWorked(0){
     if(userNum < 0){
         cout<<"Warning(User::User): userNum ("<<userNum<<") is less than 0.\n";
     }
@@ -15,9 +15,10 @@ User::User(int userNum, string name):hoursWorked(0),hoursOvertime(0),hoursStatut
     else{
         this->userNum = userNum;
         this->name = name;
+        clocked.emplace_back(9999,1,1,1,1);
     }
 }
-User::User():userNum(0),name("-No name set-"),hoursWorked(0),hoursOvertime(0),hoursStatutory(0){}
+User::User():userNum(0),name("-No name set-"),hoursWorked(0),hoursOvertime(0),hoursStatutory(0),daysWorked(0){}
 
 
 //get set functions
@@ -48,7 +49,7 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
     rTime.round15();
     Datetime rInput(date,rTime);
 
-    for(int i = clocked.size()-1 ; i >= 0 ; i--){
+    for(int i = clocked.size()-2 ; i >= 0 ; i--){
         if(clocked[i] < rInput){
             clocked.insert(clocked.begin()+i+1, rInput);
             return;
@@ -68,18 +69,23 @@ void User::fillMissingTime(){
     Time time;
     int i = 0,counter = 0,iHour,iMinute;
     string sHour,sMinute,input;
+    
     while(i<clocked.size()){
         currDate = clocked[i].getDate();
+        if(date.getYear() == 9999){
+            break;
+        }
         if(date == currDate){
             counter++;
+            //cout<<"== date: "<<date<<"  currDate: "<<currDate<<"  i: "<<i<<"  counter: "<<counter<<"  end: "<<clocked.size()-1<<endl;
         }
-        if(date != currDate || i == clocked.size()-1){
+        if(date != currDate || i == (clocked.size()-1)){
+            //cout<<"!= date: "<<date<<"  currDate: "<<currDate<<"  i: "<<i<<"  counter: "<<counter<<"  end: "<<clocked.size()-1<<endl;
             if(counter%2 == 1){
                 while(true){
+                    cout<<"\n"<<userNum<<" "<<name<<endl;
+                    
                     //printing times that day
-                    if(i == clocked.size()-1){
-                        i++;
-                    }
                     for(int j = i-counter; j < i ; j++){
                         cout<<clocked[j]<<endl;
                     }
@@ -111,42 +117,53 @@ void User::fillMissingTime(){
                 }
             }
             date = currDate;
-            counter = 1;
+            counter = 0;
+            i--;
         }
         i++;
     }
     //error checking
-    if(clocked.size()%2 == 1){
-        cout<<"Error(User::fillMissingTime): Program ended with odd elements ("<<clocked.size()<<").\n";
+    if((clocked.size()-1)%2 == 1){
+        cout<<"Error(User::fillMissingTime): Program ended with odd elements ("<<clocked.size()-1<<").\n";
     }
 }
 
 //calculating hoursWorked and hoursOvertime
 void User::calWorkHours(){
     //error checking
-    if(clocked.size()%2 == 1){
-        cout<<"Error(User::calWorkHours): Clocked vector has odd elements ("<<clocked.size()<<").\n";
+    if((clocked.size()-1)%2 == 1){
+        cout<<"Error(User::calWorkHours): Clocked vector has odd elements ("<<clocked.size()-1<<").\n";
         return;
     }
     
     Date date = clocked[0].getDate();
     Date currDate;
     float hours = 0;
-    for(int i = 0; i < clocked.size() ; i++){
+    for(int i = 0; i < (clocked.size()-1) ; i++){
         currDate = clocked[i].getDate();
         if(date == currDate && i%2 == 1){
             hours = hours + (clocked[i] - clocked[i-1]);
         }
-        if(date != currDate || i == clocked.size()-1){
+        if(date != currDate || i == clocked.size()-2){
             //if user is Wing deduct his break (30min)
             if(userNum == 8){
                 hours = hours - 0.5;
+            }
+            //if at end of list getting correct date for stat holiday check
+            if(i == clocked.size()-2){
+                date = currDate;
+            }
+            //checking for stat holiday
+            if(date.isHoliday()){
+                hoursStatutory = hoursStatutory + hours;
+                hours = 0;
             }
             //checking for daily overtime
             if((hours - 8) > 0){
                 hoursOvertime = hoursOvertime + hours - 8;
                 hours = 8;
             }
+            daysWorked++;
             hoursWorked = hoursWorked + hours;
             hours = 0;
             date = currDate;
@@ -160,21 +177,38 @@ void User::calWorkHours(){
 }
 //returns size of clocked vector
 int User::getClockedSize(){
-    return clocked.size();
+    return (clocked.size()-1);
 }
 
 
 //checks if holiday is in range of clocked times
 bool User::holidayInRange(){
-
+    vector<Date> holidays = g_startDate.holidayList();
+    
+    for(int i = 0; i < holidays.size(); i++){
+        if(g_startDate <= holidays[i] && holidays[i] <= g_endDate){
+            return true;
+        }
+    }
+    
+    //edge case: if date range is inbetween two years
+    if(g_startDate.getYear() != g_endDate.getYear()){
+        vector<Date> nextHolidays = g_endDate.holidayList();
+        for(int j = 0; j < nextHolidays.size(); j++){
+            if(g_startDate <= nextHolidays[j] && nextHolidays[j] <= g_endDate){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 
 //print functions
 void User::clockedPrint(){
     cout<<userNum<<" "<<name<<endl<<endl;
-    for(Datetime& i : clocked){
-        cout<<i<<endl;
+    for(int i = 0; i < (clocked.size()-1); i++){
+        cout<<clocked[i]<<endl;
     }
 }
 ostream& operator<<(ostream& outs, User& user){
@@ -200,14 +234,14 @@ ostream& operator<<(ostream& outs, User& user){
         outs<<"\t";
     }
     if(user.hoursWorked > 0){
-        outs<<"\t"<<(user.hoursWorked + user.hoursOvertime)*0.04;
+        outs<<"\t"<<(user.hoursWorked + user.hoursOvertime + user.hoursStatutory)*0.04;
     }
     //check if stat holiday is in date range
-    // if(){
-    //     outs<<"\t"<<(user.hoursWorked + user.hoursOvertime)/user.clocked.size()<<"(x1.0)";
-    //     if(user.hoursStatutory > 0){
-    //         outs<<" + "<<user.hoursStatutory<<"(x1.5)";
-    //     }
-    // }
+    if(user.holidayInRange() && user.hoursWorked > 0){
+        outs<<"\t\t"<<(user.hoursWorked + user.hoursOvertime + user.hoursStatutory)/user.daysWorked<<"(x1.0)";
+        if(user.hoursStatutory > 0){
+            outs<<" + "<<user.hoursStatutory<<"(x1.5)";
+        }
+    }
     return outs;
 }

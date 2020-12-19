@@ -1,5 +1,5 @@
 #include "helper.hpp"
-
+extern Date g_startDate, g_endDate;
 
 //initializing users 
 void usersInit(vector<User>& users){
@@ -25,11 +25,9 @@ void payFile2Clocked(vector<User>& users){
     //variables
     string sUserNum, sYear, sMonth, sDay, sHour, sMinute, line;
     int userNum, year, month, day, hour, minute, counter = 1;
-    Date startDate, endDate;
     
     //gets start date and end date for date range and returns payrollName
-    string payrollName = getStartEndDate(startDate,endDate);
-    
+    string payrollName = getStartEndDate(g_startDate,g_endDate);
     //Reading the payroll.dat file and exit if failed
     ifstream payrollFile(payrollName);
     if(!payrollFile.is_open()) {
@@ -37,7 +35,7 @@ void payFile2Clocked(vector<User>& users){
         exit(1);
     }
 
-    rangeIsValid(startDate,endDate);
+    rangeIsValid(g_startDate,g_endDate);
     //inputing data into user.clocked
     while(getline(payrollFile, line)){
         istringstream ss(line);
@@ -64,11 +62,11 @@ void payFile2Clocked(vector<User>& users){
         Time time(hour,minute);
         
         //break out of loop if date is greater or equal to end date
-        if(date > endDate){
-            cout<<"Start date: "<<startDate<<" End date: "<<endDate<<" currDate: "<<date<<endl;
+        if(date > g_endDate){
+            cout<<"Start date: "<<g_startDate<<" End date: "<<g_endDate<<" currDate: "<<date<<endl;
             break;
         }
-        if(date >= startDate){
+        if(date >= g_startDate){
             if((0 < userNum && userNum <= 4) || (6 <= userNum && userNum <=13)){
                 users[userNum].addClockedTime(userNum,date,time);
             }
@@ -163,7 +161,15 @@ void printUsersClocked(vector<User>& users){
 }
 
 
-
+//printis out users vector
+void printUsers(vector<User>& users){
+    cout<<"\n\t\tHours Worked\t\tVacationPay\t\tStat Hours\n";
+    for(int i = 0; i < users.size(); i++){
+        if(users[i].getUserNum() != 0){
+            cout<<users[i]<<endl;
+        }
+    } 
+}
 
 
 

@@ -8,6 +8,7 @@
 #include <sstream> //formatted string processing
 #include "datetime.hpp"
 using namespace std;
+//Date g_startDate, g_endDate;
 
 class User{
     private:
@@ -17,6 +18,7 @@ class User{
         float hoursWorked;
         float hoursOvertime;
         float hoursStatutory;
+        int daysWorked;
     public:
         //constructors
         User(int userNum, string name);

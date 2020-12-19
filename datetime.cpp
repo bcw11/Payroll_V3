@@ -67,4 +67,5 @@ void Datetime::stringPrint(){
 }
 ostream& operator<<(ostream& outs, Datetime& datetime){
     outs<<datetime.date<<" "<<datetime.time;
+    return outs;
 }
