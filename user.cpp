@@ -38,7 +38,7 @@ float User::getHoursStatutory(){
     return hoursStatutory;
 }   
 Datetime User::getDatetime(int i){
-    if(i >= 0 && i < clocked.size()){
+    if(i >= 0 && i < ((int)clocked.size() - 1)){
         return clocked[i];
     }
     Datetime zero;

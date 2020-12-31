@@ -275,6 +275,14 @@ void Date::stringPrint(){
     cout<<months[month-1]<<" "<<day<<", "<<year;
 }
 ostream& operator<<(ostream& outs, Date& date){
-    outs<<date.year<<"-"<<date.month<<"-"<<date.day;
+    outs<<date.year<<"-";
+    if(date.month < 10){
+        outs<<0;
+    }
+    outs<<date.month<<"-";
+    if(date.day < 10){
+        outs<<0;
+    }
+    outs<<date.day;
     return outs;
 }

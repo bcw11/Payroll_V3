@@ -55,11 +55,11 @@ int main(){
     printUsers(users);
 
     // //menu
-    cout<<"\n\nP A Y R O L L   M E N U\n";
     while(true){
         string sUserInput;
         int iUserInput;
 
+        cout<<"\n\nP A Y R O L L   M E N U\n";
         cout<<"(1) - Exit the program\n";
         cout<<"(2) - Print hours Worked\n";
         cout<<"(3) - Print user's time table\n";
@@ -77,8 +77,8 @@ int main(){
             cout<<"\n\n";
         }
         else if(iUserInput == 3){
+            cout<<"\n\n(3) U S E R S   T I M E   T A B L E\n\n";
             printUsersClocked(users);
-            cout<<"(3) Printed users time table\n\n";
         }
         else{
             cout<<"Error: \""<<sUserInput<<"\" is an invalid input\n\n";

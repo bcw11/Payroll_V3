@@ -99,6 +99,9 @@ bool operator>=(Time& t1, Time& t2){
 
 //print 
 ostream& operator<<(ostream& outs, Time& time){
+    if(time.hour < 10){
+        outs<<"0";
+    }
     outs<<time.hour<<":";
     if(time.minute < 10){
         outs<<"0";

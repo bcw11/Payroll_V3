@@ -1,4 +1,5 @@
 #include "helper.hpp"
+using namespace std;
 extern Date g_startDate, g_endDate;
 
 //initializing users 
@@ -155,25 +156,41 @@ void printUsersClocked(vector<User>& users){
     Datetime datetime;
     Datetime zero;
     Time ten(10,0);
-    for(int i = 0; i < 100; i++){
-        for(int j = 1; j < users.size(); j++){
-            datetime = users[j].getDatetime(i);
-            if(datetime > zero){
-                cout<<datetime<<"\t";
-            }
-            else if(datetime.getTime() < ten){
-                cout<<" ";
-            }
 
+    for(int i = 1; i < users.size(); i++){
+        if(i != 5 && i != 10){
+            cout<<i<<" "<<users[i].getName()<<"\t\t";
+            if(users[i].getName().size() <= 5){
+                cout<<"\t";
+            }
+            if(i > 10 && users[i].getName().size() <= 5){
+                cout<<"\b";
+            }
+        }
+    }
+    cout<<"\n\n";
+    for(int i = 0; i < 35; i++){
+        for(int j = 1; j < users.size(); j++){
+            if(j != 5 && j != 10){
+                datetime = users[j].getDatetime(i);
+                if(datetime > zero){
+                    cout<<datetime<<"\t";
+                }
+                else{
+                    cout<<"\t\t\t";
+                }
+            }
         }
         cout<<"\n";
     }
-    // for(int i = 0; i < users.size(); i++){
-    //     if(users[i].getUserNum() != 0){
-    //         users[i].clockedPrint();
-    //         cout<<endl<<endl;
-    //     }
-    // }
+
+
+    for(int i = 0; i < users.size(); i++){
+        if(users[i].getUserNum() != 0){
+            users[i].clockedPrint();
+            cout<<endl<<endl;
+        }
+    }
 }
 
 
