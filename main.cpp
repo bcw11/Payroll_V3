@@ -11,19 +11,6 @@
 using namespace std;
 Date g_startDate, g_endDate;
 
-// int main(){
-    // Date date(2020,12,18);
-    // for(int i = 1; i < 13;i++){
-    //     for(int j = 1; j < 32; j++){
-    //         date.setDay(j);
-    //         date.setMonth(i);
-    //         if(date.isHoliday()){
-    //             cout<<date<<endl;
-    //         }
-    //     }
-    // }
-// }
-
 int main(){
     //all float outputs are now 2 digits after the decimal
     cout<<fixed<<setprecision(2)<<"\n\n\n";
