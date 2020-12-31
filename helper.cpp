@@ -152,18 +152,34 @@ void rangeIsValid(Date& start, Date& end){
 
 //prints users clocked vector
 void printUsersClocked(vector<User>& users){
-    for(int i = 0; i < users.size(); i++){
-        if(users[i].getUserNum() != 0){
-            users[i].clockedPrint();
-            cout<<endl<<endl;
+    Datetime datetime;
+    Datetime zero;
+    Time ten(10,0);
+    for(int i = 0; i < 100; i++){
+        for(int j = 1; j < users.size(); j++){
+            datetime = users[j].getDatetime(i);
+            if(datetime > zero){
+                cout<<datetime<<"\t";
+            }
+            else if(datetime.getTime() < ten){
+                cout<<" ";
+            }
+
         }
+        cout<<"\n";
     }
+    // for(int i = 0; i < users.size(); i++){
+    //     if(users[i].getUserNum() != 0){
+    //         users[i].clockedPrint();
+    //         cout<<endl<<endl;
+    //     }
+    // }
 }
 
 
 //printis out users vector
 void printUsers(vector<User>& users){
-    cout<<"\n\t\tHours Worked\t\tVacationPay\t\tStat Hours\n";
+    cout<<"\n\t\tHours Worked\t\tVacationPay\tStat Hours\n";
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
             cout<<users[i]<<endl;
@@ -171,5 +187,13 @@ void printUsers(vector<User>& users){
     } 
 }
 
-
+//checks if input is valid
+//returns int value of string if valid else, returns -1
+int inputIsValid(string& input){
+    int num = atoi(input.c_str());
+    if(num < 1 || num > 2){
+        return -1;
+    }
+    return num;
+}
 

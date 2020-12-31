@@ -37,7 +37,13 @@ float User::getHourOvertime(){
 float User::getHoursStatutory(){
     return hoursStatutory;
 }   
-
+Datetime User::getDatetime(int i){
+    if(i >= 0 && i < clocked.size()){
+        return clocked[i];
+    }
+    Datetime zero;
+    return zero;
+}
 
 //rounds time and inserts into the correct order. Doesn't insert if time difference is 0.
 void User::addClockedTime(int userNum, Date& date, Time& time){
@@ -226,11 +232,12 @@ ostream& operator<<(ostream& outs, User& user){
     }
     if(user.hoursOvertime > 0){
         outs<<" + "<<user.hoursOvertime<<" OT";
+
     }
     else{
         outs<<"\t";
     }
-    if(user.hoursOvertime <= 10){
+    if(user.hoursOvertime < 10){
         outs<<"\t";
     }
     if(user.hoursWorked > 0){

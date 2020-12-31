@@ -27,15 +27,6 @@ Date g_startDate, g_endDate;
 
 
 int main(){
-    // Datetime datetime1(2020,12,11,20,0);
-    // Datetime datetime2(2020,12,1,21,0);
-    // cout<<(datetime1<datetime2)<<endl;
-    // Date date1(2020,10,5);
-    // Date date2(2020,10,5);
-    // cout<<(date1==date2)<<endl;
-    // cout<<(date1!=date2)<<endl;
-    // cout<<(1!=1)<<endl;
-    
     //all float outputs are now 2 digits after the decimal
     cout<<fixed<<setprecision(2);
 
@@ -63,16 +54,34 @@ int main(){
     //printing out users vector
     printUsers(users);
 
-    //menu
+    // //menu
+    cout<<"\n\nP A Y R O L L   M E N U\n";
     while(true){
         string sUserInput;
         int iUserInput;
 
-        cout<<"(0) - Exit the program\n";
-        cout<<"(1) - Print hours Worked\n";
-        cout<<"(2) - Print user's time table\n";
-        cin>>sUserInput;
-        
-        switch()
+        cout<<"(1) - Exit the program\n";
+        cout<<"(2) - Print hours Worked\n";
+        cout<<"(3) - Print user's time table\n";
+        cout<<"\nInput: ";
+        getline(cin,sUserInput);
+        iUserInput = atoi(sUserInput.c_str());
+
+        if(iUserInput == 1){  
+            cout<<"(1) Exiting program\n\n";
+            return 0;
+        }
+        else if(iUserInput == 2){
+            cout<<"\n\n(2) U S E R S   H O U R S    W O R K E D\n\n";
+            printUsers(users);
+            cout<<"\n\n";
+        }
+        else if(iUserInput == 3){
+            printUsersClocked(users);
+            cout<<"(3) Printed users time table\n\n";
+        }
+        else{
+            cout<<"Error: \""<<sUserInput<<"\" is an invalid input\n\n";
+        }
     }
 }

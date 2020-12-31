@@ -31,7 +31,9 @@ void printUsersClocked(vector<User>& users);
 //prints out users vector
 void printUsers(vector<User>& users);
 
-
+//checks if input is valid
+//returns int value of string if valid else, returns -1
+int inputIsValid(string& input);
 
 
 #endif 
