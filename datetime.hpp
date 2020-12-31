@@ -2,6 +2,7 @@
 #define DATETIME
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "date.hpp"
 #include "time.hpp"
@@ -33,7 +34,6 @@ class Datetime{
         //print functions
         void stringPrint();
         friend ostream& operator<<(ostream& outs, Datetime& datetime);
-
 
 };
 

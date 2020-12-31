@@ -36,7 +36,10 @@ void payFile2Clocked(vector<User>& users){
         exit(1);
     }
 
+    //checking if date range is valid based on previous date ranges
     rangeIsValid(g_startDate,g_endDate);
+
+    cout<<"D E L E T E D   T I M E S\n";
     //inputing data into user.clocked
     while(getline(payrollFile, line)){
         istringstream ss(line);
@@ -64,7 +67,8 @@ void payFile2Clocked(vector<User>& users){
         
         //break out of loop if date is greater or equal to end date
         if(date > g_endDate){
-            cout<<"Start date: "<<g_startDate<<" End date: "<<g_endDate<<" currDate: "<<date<<endl;
+            cout<<"\n\nD A T E   R A N G E\n";
+            cout<<"Start date: "<<g_startDate<<"\t\tEnd date: "<<g_endDate<<"\t\tBreak date: "<<date<<endl;
             break;
         }
         if(date >= g_startDate){
@@ -100,6 +104,7 @@ string getStartEndDate(Date& start, Date& end){
     cout<<"File format: MMM dd - MMM dd (YYYY).dat\n";
     cout<<"Enter file name: ";
     getline(cin,filename);
+    cout<<"\n";
     istringstream ss(filename);
     
     //putting data into start end dates
@@ -208,7 +213,7 @@ void printUsersClocked(vector<User>& users){
 
 //printis out users vector
 void printUsers(vector<User>& users){
-    cout<<"\n\t\tHours Worked\t\tVacationPay\tStat Hours\n";
+    cout<<"\n\t\tHours Worked\t\tVacation Pay\tStat Hours\n";
     for(int i = 0; i < users.size(); i++){
         if(users[i].getUserNum() != 0){
             cout<<users[i]<<endl;
@@ -221,6 +226,14 @@ void printUsers(vector<User>& users){
 //saves user data to file
 void save2File(vector<User>& users){
     ofstream oFile;
-    oFile.open(g_startDate+"-"+g_endDate+".txt");
-
+    oFile<<fixed<<setprecision(2);
+    oFile.open((string)g_startDate+" - "+(string)g_endDate+" ("+to_string(g_startDate.getYear())+")_payroll.txt");
+    oFile<<(string)g_startDate+" - "+(string)g_endDate+" ("+to_string(g_startDate.getYear())+")";
+    oFile<<"\n\n\t\tHours Worked\t\tVacation Pay\tStat Hours\n";
+    for(int i = 0; i < users.size(); i++){
+        if(users[i].getUserNum() != 0){
+            oFile<<users[i]<<endl;
+        }
+    } 
+    oFile.close();
 }

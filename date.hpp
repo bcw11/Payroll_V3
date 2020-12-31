@@ -47,6 +47,11 @@ class Date{
         void stringPrint();
         friend ostream& operator<<(ostream& outs, Date& date);
 
+        //overloaded string 
+        operator string() const {
+            string months[12] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+            return months[month-1]+" "+to_string(day);
+            } 
 };
 
 #endif

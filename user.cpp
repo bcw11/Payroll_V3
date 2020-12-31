@@ -61,7 +61,7 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
             return;
         }
         else if(abs(float(rInput - clocked[i])) <= 0.25){
-            cout<<"DELETED: ("<<input<<") | User:"<<userNum<<" | Time difference ("<<clocked[i]<<" - "<<input<<") ("<<(input - clocked[i])*60<<" min)\n";
+            cout<<userNum<<" "<<name<<"\t\tDELETED: "<<input<<"\tTime difference: "<<clocked[i]<<" - "<<input<<" = "<<(clocked[i] - input)*60<<" min\n";
             return;
         }
     }
