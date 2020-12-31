@@ -11,7 +11,6 @@
 using namespace std;
 Date g_startDate, g_endDate;
 
-
 // int main(){
     // Date date(2020,12,18);
     // for(int i = 1; i < 13;i++){
@@ -24,7 +23,6 @@ Date g_startDate, g_endDate;
     //     }
     // }
 // }
-
 
 int main(){
     //all float outputs are now 2 digits after the decimal
@@ -63,6 +61,7 @@ int main(){
         cout<<"(1) - Exit the program\n";
         cout<<"(2) - Print hours Worked\n";
         cout<<"(3) - Print user's time table\n";
+        cout<<"(4) - Save data to file\n";
         cout<<"\nInput: ";
         getline(cin,sUserInput);
         iUserInput = atoi(sUserInput.c_str());
@@ -79,6 +78,10 @@ int main(){
         else if(iUserInput == 3){
             cout<<"\n\n(3) U S E R S   T I M E   T A B L E\n\n";
             printUsersClocked(users);
+        }
+        else if(iUserInput == 3){
+            cout<<"\n\n(4) S A V E   D A T A   T O   F I L E\n\n";
+            save2File(users);
         }
         else{
             cout<<"Error: \""<<sUserInput<<"\" is an invalid input\n\n";

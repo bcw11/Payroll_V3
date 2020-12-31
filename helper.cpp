@@ -153,23 +153,29 @@ void rangeIsValid(Date& start, Date& end){
 
 //prints users clocked vector
 void printUsersClocked(vector<User>& users){
+    //Horizontal print
     Datetime datetime;
     Datetime zero;
-    Time ten(10,0);
-
+    int size = users[1].getClockedSize();
     for(int i = 1; i < users.size(); i++){
         if(i != 5 && i != 10){
+            //printing names horizontally 
             cout<<i<<" "<<users[i].getName()<<"\t\t";
             if(users[i].getName().size() <= 5){
                 cout<<"\t";
             }
             if(i > 10 && users[i].getName().size() <= 5){
-                cout<<"\b";
+                cout<<"\b\b\b\b\b\b\b\b";
+            }
+            
+            //determining the largest clocked size
+            if(users[i].getClockedSize() > size){
+                size = users[i].getClockedSize();
             }
         }
     }
     cout<<"\n\n";
-    for(int i = 0; i < 35; i++){
+    for(int i = 0; i < size; i++){
         for(int j = 1; j < users.size(); j++){
             if(j != 5 && j != 10){
                 datetime = users[j].getDatetime(i);
@@ -177,20 +183,26 @@ void printUsersClocked(vector<User>& users){
                     cout<<datetime<<"\t";
                 }
                 else{
-                    cout<<"\t\t\t";
+                    cout<<"|\t\t\t";
                 }
             }
         }
         cout<<"\n";
     }
-
-
-    for(int i = 0; i < users.size(); i++){
-        if(users[i].getUserNum() != 0){
-            users[i].clockedPrint();
-            cout<<endl<<endl;
+    //printing total hours worked
+    for(int i = 1; i < users.size(); i++){
+        if(i != 5 && i != 10){
+            cout<<users[i].getHoursWorked() + users[i].getHoursStatutory() + users[i].getHourOvertime()<<" Hrs\t\t";
         }
     }
+    cout<<"\n";
+    // Vertical Print
+    // for(int i = 0; i < users.size(); i++){
+    //     if(users[i].getUserNum() != 0){
+    //         users[i].clockedPrint();
+    //         cout<<endl<<endl;
+    //     }
+    // }
 }
 
 
@@ -204,13 +216,11 @@ void printUsers(vector<User>& users){
     } 
 }
 
-//checks if input is valid
-//returns int value of string if valid else, returns -1
-int inputIsValid(string& input){
-    int num = atoi(input.c_str());
-    if(num < 1 || num > 2){
-        return -1;
-    }
-    return num;
-}
 
+
+//saves user data to file
+void save2File(vector<User>& users){
+    ofstream oFile;
+    oFile.open(g_startDate+"-"+g_endDate+".txt");
+
+}
