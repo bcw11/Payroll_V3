@@ -137,6 +137,7 @@ string getStartEndDate(Date& start, Date& end){
     return filename;
 }
 
+
 //checks the vadility of start and end dates
 void rangeIsValid(Date& start, Date& end){
     //only cheecking dates after oct. 18 2020
@@ -222,12 +223,11 @@ void printUsers(vector<User>& users){
 }
 
 
-
 //saves user data to file
 void save2File(vector<User>& users){
     ofstream oFile;
     oFile<<fixed<<setprecision(2);
-    oFile.open((string)g_startDate+" - "+(string)g_endDate+" ("+to_string(g_startDate.getYear())+")_payroll.txt");
+    oFile.open((string)g_startDate+" - "+(string)g_endDate+" ("+to_string(g_startDate.getYear())+") PAYROLL.txt");
     oFile<<(string)g_startDate+" - "+(string)g_endDate+" ("+to_string(g_startDate.getYear())+")";
     oFile<<"\n\n\t\tHours Worked\t\tVacation Pay\tStat Hours\n";
     for(int i = 0; i < users.size(); i++){

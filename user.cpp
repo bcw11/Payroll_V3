@@ -61,7 +61,14 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
             return;
         }
         else if(abs(float(rInput - clocked[i])) <= 0.25){
-            cout<<userNum<<" "<<name<<"\t\tDELETED: "<<input<<"\tTime difference: "<<clocked[i]<<" - "<<input<<" = "<<(clocked[i] - input)*60<<" min\n";
+            cout<<userNum<<" "<<name;
+            if(userNum < 10){
+                cout<<" ";
+            }
+            if(name.size() < 5){
+                cout<<"\t";
+            }
+            cout<<"\t\tDELETED: "<<input<<"\tTime difference: "<<clocked[i]<<" - "<<input<<" = "<<(clocked[i] - input)*60<<" min\n";
             return;
         }
     }
@@ -89,15 +96,17 @@ void User::fillMissingTime(){
             //cout<<"!= date: "<<date<<"  currDate: "<<currDate<<"  i: "<<i<<"  counter: "<<counter<<"  end: "<<clocked.size()-1<<endl;
             if(counter%2 == 1){
                 while(true){
-                    cout<<"\n"<<userNum<<" "<<name<<endl;
-                    
+                    cout<<"\n"<<userNum<<" "<<name<<"\t";
+                    clocked[i-counter].getDate().stringPrint();
+                    cout<<"\n";
                     //printing times that day
                     for(int j = i-counter; j < i ; j++){
-                        cout<<clocked[j]<<endl;
+                        Time time = clocked[j].getTime();
+                        cout<<"\t\t"<<time<<endl;
                     }
 
                     //getting input from user
-                    cout<<"Enter the missing time(HH mm): ";
+                    cout<<"Missing time:   ";
                     getline(cin,input);
                     cout<<"\n";
 
