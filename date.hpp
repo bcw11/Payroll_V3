@@ -31,6 +31,7 @@ class Date{
         bool dayIsValid(int day);
         bool isLeapYear();
         int dayOfWeek();
+        void stringDayOfWeek();
         bool isHoliday();
         vector<Date> holidayList();
 

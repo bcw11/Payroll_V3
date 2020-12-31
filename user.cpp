@@ -81,6 +81,7 @@ void User::fillMissingTime(){
     Date currDate;
     Time time;
     int i = 0,counter = 0,iHour,iMinute;
+    bool flag = false;
     string sHour,sMinute,input;
     
     while(i<clocked.size()){
@@ -95,10 +96,19 @@ void User::fillMissingTime(){
         if(date != currDate || i == (clocked.size()-1)){
             //cout<<"!= date: "<<date<<"  currDate: "<<currDate<<"  i: "<<i<<"  counter: "<<counter<<"  end: "<<clocked.size()-1<<endl;
             if(counter%2 == 1){
+                
+                //printing title
+                if(flag == false){
+                    cout<<"\n\nM I S S I N G   T I M E S | "<<userNum<<" "<<name<<endl;
+                    flag = true;
+                }
+
+                //getting missing time from user
                 while(true){
-                    cout<<"\n"<<userNum<<" "<<name<<"\t";
                     clocked[i-counter].getDate().stringPrint();
-                    cout<<"\n";
+                    cout<<" (";
+                    clocked[i-counter].getDate().stringDayOfWeek();
+                    cout<<")\n";
                     //printing times that day
                     for(int j = i-counter; j < i ; j++){
                         Time time = clocked[j].getTime();
@@ -108,7 +118,7 @@ void User::fillMissingTime(){
                     //getting input from user
                     cout<<"Missing time:   ";
                     getline(cin,input);
-                    cout<<"\n";
+                    cout<<endl;
 
                     //if input is \n end while loop
                     if(input == ""){

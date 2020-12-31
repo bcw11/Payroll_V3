@@ -103,7 +103,10 @@ int Date::dayOfWeek(){
         y -= 1;
     }
     return (y + (y / 4) - (y / 100) +  (y / 400) + t[m - 1] + d) % 7;      
-    //string w[7] = {"Sunday","Monday","Tuesday","Wednesday","Thrusday","Friday","Saturday"};
+}
+void Date::stringDayOfWeek(){
+    string DOW[7] = {"Sun","Mon","Tue","Wed","Thr","Fri","Sat"};
+    cout<<DOW[dayOfWeek()];
 }
 
 //checks if date is a holiday
