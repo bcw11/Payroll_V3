@@ -39,7 +39,7 @@ void payFile2Clocked(vector<User>& users){
     //checking if date range is valid based on previous date ranges
     rangeIsValid(g_startDate,g_endDate);
 
-    cout<<"D E L E T E D   T I M E S\n";
+    cout<<"\n\nD E L E T E D   T I M E S\n";
     //inputing data into user.clocked
     while(getline(payrollFile, line)){
         istringstream ss(line);
@@ -67,8 +67,8 @@ void payFile2Clocked(vector<User>& users){
         
         //break out of loop if date is greater or equal to end date
         if(date > g_endDate){
-            cout<<"\n\nD A T E   R A N G E\n";
-            cout<<"Start date: "<<g_startDate<<"\t\tEnd date: "<<g_endDate<<"\t\tBreak date: "<<date<<endl;
+            cout<<"\n\n\n\nD A T E   R A N G E\n";
+            cout<<"  Start date: "<<g_startDate<<"\t\tEnd date: "<<g_endDate<<"\t\tBreak date: "<<date<<endl;
             break;
         }
         if(date >= g_startDate){
@@ -101,8 +101,9 @@ string getStartEndDate(Date& start, Date& end){
     monthMap["Dec"] = 12;
 
     //getting filename
-    cout<<"File format: MMM dd - MMM dd (YYYY).dat\n";
-    cout<<"Enter file name: ";
+    cout<<"P A Y R O L L _ V 3\n";
+    cout<<"  File format: MMM dd - MMM dd (YYYY).dat\n";
+    cout<<"  Enter file name: ";
     getline(cin,filename);
     cout<<"\n";
     istringstream ss(filename);
@@ -163,6 +164,7 @@ void printUsersClocked(vector<User>& users){
     Datetime datetime;
     Datetime zero;
     int size = users[1].getClockedSize();
+    cout<<"  ";
     for(int i = 1; i < users.size(); i++){
         if(i != 5 && i != 10){
             //printing names horizontally 
@@ -180,8 +182,8 @@ void printUsersClocked(vector<User>& users){
             }
         }
     }
-    cout<<"\n\n";
     for(int i = 0; i < size; i++){
+        cout<<"\n  ";
         for(int j = 1; j < users.size(); j++){
             if(j != 5 && j != 10){
                 datetime = users[j].getDatetime(i);
@@ -193,8 +195,8 @@ void printUsersClocked(vector<User>& users){
                 }
             }
         }
-        cout<<"\n";
     }
+    cout<<"\n  ";
     //printing total hours worked
     for(int i = 1; i < users.size(); i++){
         if(i != 5 && i != 10){

@@ -13,7 +13,7 @@ Date g_startDate, g_endDate;
 
 int main(){
     //all float outputs are now 2 digits after the decimal
-    cout<<fixed<<setprecision(2)<<"\n\n\n";
+    cout<<fixed<<setprecision(2)<<"\n\n";
 
     //initializing users
     vector<User> users;
@@ -36,8 +36,12 @@ int main(){
         }
     }
 
+    //printing out user time table
+    cout<<"\n\n\n\nU S E R S   T I M E   T A B L E\n";
+    printUsersClocked(users);
+
     //printing out users vector
-    cout<<"\n\nU S E R S   H O U R S    W O R K E D";
+    cout<<"\n\n\n\nU S E R S   H O U R S    W O R K E D";
     printUsers(users);
 
     // //menu
@@ -46,10 +50,10 @@ int main(){
         int iUserInput;
 
         cout<<"\n\nP A Y R O L L   M E N U\n";
-        cout<<"(1) - Print hours Worked\n";
-        cout<<"(2) - Print user's time table\n";
-        cout<<"(3) - Save data to file\n";
-        cout<<"Press enter to exit\n";
+        cout<<"  (1) - Print hours Worked\n";
+        cout<<"  (2) - Print user's time table\n";
+        cout<<"  (3) - Save data to file\n";
+        cout<<"  Press enter to exit\n";
         cout<<"\nInput: ";
         getline(cin,sUserInput);
         if(sUserInput == ""){

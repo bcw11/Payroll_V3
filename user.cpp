@@ -61,7 +61,7 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
             return;
         }
         else if(std::abs(float(rInput - clocked[i])) <= 0.25){
-            cout<<userNum<<" "<<name;
+            cout<<"  "<<userNum<<" "<<name;
             if(userNum < 10){
                 cout<<" ";
             }
