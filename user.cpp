@@ -55,12 +55,9 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
     rTime.round15();
     Datetime rInput(date,rTime);
 
+    Datetime test(2020,12,31,15,15);
     for(int i = clocked.size()-2 ; i >= 0 ; i--){
-        if(clocked[i] < rInput){
-            clocked.insert(clocked.begin()+i+1, rInput);
-            return;
-        }
-        else if(std::abs(float(rInput - clocked[i])) <= 0.25){
+        if(std::abs(float(rInput - clocked[i])) < 0.25){
             cout<<"  "<<userNum<<" "<<name;
             if(userNum < 10){
                 cout<<" ";
@@ -69,6 +66,10 @@ void User::addClockedTime(int userNum, Date& date, Time& time){
                 cout<<"\t";
             }
             cout<<"\t\tDELETED: "<<input<<"\tTime difference: "<<clocked[i]<<" - "<<input<<" = "<<(clocked[i] - input)*60<<" min\n";
+            return;
+        }
+        else if(clocked[i] < rInput){
+            clocked.insert(clocked.begin()+i+1, rInput);
             return;
         }
     }

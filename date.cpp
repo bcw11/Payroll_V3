@@ -221,12 +221,6 @@ int operator-(Date& d1, Date& d2){
         }
     }
     output = days1 + (d1.year - d2.year)*365 - days2;
-    if(d1.isLeapYear() && (d1.month > 2 || (d1.month == 2 && d1.day == 29))){
-        output++;
-    }
-    if(d2.isLeapYear() && (d2.month > 2 || (d2.month == 2 && d2.day == 29))){
-        output--;
-    }
     return output*24;
 }
 bool operator==(Date& d1, Date& d2){

@@ -12,7 +12,7 @@ void usersInit(vector<User>& users){
     users.emplace_back(4,"Eliana");
     users.emplace_back(0,"");
     users.emplace_back(6,"Kezia");
-    users.emplace_back(7,"Meredith");
+    users.emplace_back(0,"");
     users.emplace_back(8,"Wing");
     users.emplace_back(9,"Zhang");
     users.emplace_back(0,"");
@@ -132,9 +132,15 @@ string getStartEndDate(Date& start, Date& end){
     getline(ss,sBuffer,'(');
     getline(ss,sBuffer,')');
     iBuffer = atoi(sBuffer.c_str());
+    //if end date is smaller than start date, it means its in the new year
+    if(start > end){
+        end.setYear(iBuffer + 1);
+    }
+    else{
+        end.setYear(iBuffer);
+    }
     start.setYear(iBuffer);
-    end.setYear(iBuffer);
-
+    
     return filename;
 }
 
@@ -147,13 +153,13 @@ void rangeIsValid(Date& start, Date& end){
         cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") end date is bigger than start date.\n";
     }
     else if((end-start+24) < 14*24){
-        cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") is less than 14 days.\n";
+        cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") is less than 14 days. Days: ("<<(end-start+24)/24<<")\n";
     }
     else if((end-start+24) > 14*24){
-        cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") is greater than 14 days.\n";
+        cout<<"Warning(rangeIsValid): Range ("<<start<<" "<<end<<") is greater than 14 days. Days: ("<<(end-start+24)/24<<")\n";
     }
     if(((start-oct18-1)/24)%14 != 0){
-        cout<<"Warning(rangeIsValid): Start date does not start as a multiple of 2 weeks from Oct 18, 2020. ("<<start<<" "<<end<<")\n";
+        cout<<"Warning(rangeIsValid): Start date does not start as a multiple of 2 weeks from Oct 18, 2020. ("<<start<<" "<<end<<") Days: ("<<(end-start+24)/24<<")\n";
     }
 }
 
@@ -161,14 +167,15 @@ void rangeIsValid(Date& start, Date& end){
 //prints users clocked vector
 void printUsersClocked(vector<User>& users){
     //Horizontal print
-    Datetime datetime;
-    Datetime zero;
     int size = users[1].getClockedSize();
+
     cout<<"  ";
     for(int i = 1; i < users.size(); i++){
-        if(i != 5 && i != 10){
-            //printing names horizontally 
+        
+        if(i != 5 && i != 7 && i != 10){
+            //printing user names on the same line 
             cout<<i<<" "<<users[i].getName()<<"\t\t";
+
             if(users[i].getName().size() <= 5){
                 cout<<"\t";
             }
@@ -182,13 +189,24 @@ void printUsersClocked(vector<User>& users){
             }
         }
     }
+    
+    //printing clocked in times
+    Datetime currDatetime;
+    // Date currDate;
+    // Date date[13] = {users[0].};
+    // int tab[13];
+    Datetime zero;
     for(int i = 0; i < size; i++){
         cout<<"\n  ";
         for(int j = 1; j < users.size(); j++){
-            if(j != 5 && j != 10){
-                datetime = users[j].getDatetime(i);
-                if(datetime > zero){
-                    cout<<datetime<<"\t";
+            if(j != 5 && j != 7 && j != 10){
+                currDatetime = users[j].getDatetime(i);
+                //currDate = currDatetime.getDate();
+                // if(date[j] != currDate || i == users[j].getClockedSize()-2){
+                //     date[j] = currDate;
+                // }
+                if(currDatetime > zero){
+                    cout<<currDatetime<<"\t";
                 }
                 else{
                     cout<<"|\t\t\t";
@@ -196,14 +214,16 @@ void printUsersClocked(vector<User>& users){
             }
         }
     }
+    
     cout<<"\n  ";
     //printing total hours worked
     for(int i = 1; i < users.size(); i++){
-        if(i != 5 && i != 10){
+        if(i != 5 && i != 7 && i != 10){
             cout<<users[i].getHoursWorked() + users[i].getHoursStatutory() + users[i].getHourOvertime()<<" Hrs\t\t";
         }
     }
     cout<<"\n";
+
     // Vertical Print
     // for(int i = 0; i < users.size(); i++){
     //     if(users[i].getUserNum() != 0){
